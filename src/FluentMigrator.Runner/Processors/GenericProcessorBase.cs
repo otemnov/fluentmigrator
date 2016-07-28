@@ -83,7 +83,7 @@ namespace FluentMigrator.Runner.Processors
 
         public override void CommitTransaction()
         {
-            if (Transaction == null) return;
+			if (Transaction == null || Connection.State == ConnectionState.Closed) return;
 
             Announcer.Say("Committing Transaction");
             Transaction.Commit();
